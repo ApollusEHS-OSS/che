@@ -17,8 +17,8 @@ function runOpenshiftConnectorTest(){
     -e TS_SELENIUM_WORKSPACE_STATUS_POLLING=20000 \
     -e TS_SELENIUM_BASE_URL=${CHE_ROUTE} \
     -e TS_SELENIUM_LOG_LEVEL=DEBUG \
-    -e TS_SELENIUM_USERNAME=admin \
-    -e TS_SELENIUM_PASSWORD=admin \
+    -e TS_SELENIUM_USERNAME=${TEST_USERNAME} \
+    -e TS_SELENIUM_PASSWORD=${TEST_USERNAME} \
     -e TS_SELENIUM_MULTIUSER=true \
     -e DELETE_WORKSPACE_ON_FAILED_TEST=true \
     -e TS_SELENIUM_START_WORKSPACE_TIMEOUT=900000 \
@@ -48,6 +48,7 @@ prepareCustomResourcePatchFile
 installCheCtl
 installAndStartMinishift
 deployCheIntoCluster --che-operator-cr-patch-yaml=/tmp/custom-resource-patch.yaml
+defineCheRoute
 createTestUserAndObtainUserToken
 runOpenshiftConnectorTest
 echo "=========================== THIS IS POST TEST ACTIONS =============================="
