@@ -15,7 +15,7 @@ function runOpenshiftConnectorTest(){
     -e TS_SELENIUM_HEADLESS=true \
     -e TS_SELENIUM_LOAD_PAGE_TIMEOUT=420000 \
     -e TS_SELENIUM_WORKSPACE_STATUS_POLLING=20000 \
-    -e TS_SELENIUM_BASE_URL=${CHE_ROUTE} \
+    -e TS_SELENIUM_BASE_URL="https://$CHE_ROUTE" \
     -e TS_SELENIUM_LOG_LEVEL=DEBUG \
     -e TS_SELENIUM_USERNAME=${TEST_USERNAME} \
     -e TS_SELENIUM_PASSWORD=${TEST_USERNAME} \
@@ -27,7 +27,7 @@ function runOpenshiftConnectorTest(){
     -e TS_GITHUB_TEST_REPO_ACCESS_TOKEN=990040386b7d5bdf4f57001de4659e03a0b352e7 \
     -e TS_GITHUB_TEST_REPO=chepullreq4/Spoon-Knife \
     -e NODE_TLS_REJECT_UNAUTHORIZED=0 \
-    quay.io/eclipse/che-e2e:nightly
+    maxura/e2e-tests:CHE-16927 || IS_TESTS_FAILED=true
 }
 
 
