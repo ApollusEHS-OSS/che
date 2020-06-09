@@ -435,7 +435,7 @@ function runDevfileTestSuite() {
   REPORT_FOLDER=$(pwd)/report
   ### Run tests
   docker run --shm-size=1g --net=host  --ipc=host -v $REPORT_FOLDER:/tmp/e2e/report:Z \
-  -e TS_SELENIUM_BASE_URL="https://$CHE_ROUTE" \
+  -e TS_SELENIUM_BASE_URL="http://$CHE_ROUTE" \
   -e TS_SELENIUM_LOG_LEVEL=DEBUG \
   -e TS_SELENIUM_MULTIUSER=true \
   -e TS_SELENIUM_USERNAME="admin" \
