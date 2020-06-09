@@ -11,11 +11,13 @@ echo "========Starting nigtly test job $(date)========"
 source tests/.infra/centos-ci/functional_tests_utils.sh
 
 function runOpenshiftConnectorTest(){
+  echo"++++++++++++++++++++++++++++KeyCloak URL+++++++++++++++++++++++++++++"
+    curl -X POST -d 'client_id=che-public&username=admin&password=admin&grant_type=password' https://keycloak-che.$CHE_ROUTE/auth/realms/che/protocol/openid-connect/token
     docker run --shm-size=4096m -p 5920:5920 \
     -e TS_SELENIUM_HEADLESS=false \
     -e TS_SELENIUM_LOAD_PAGE_TIMEOUT=420000 \
     -e TS_SELENIUM_WORKSPACE_STATUS_POLLING=20000 \
-    -e TS_SELENIUM_BASE_URL="http://$CHE_ROUTE" \
+    -e TS_SELENIUM_BASE_URL="https://$CHE_ROUTE" \
     -e TS_SELENIUM_LOG_LEVEL=DEBUG \
     -e TS_SELENIUM_USERNAME=${TEST_USERNAME} \
     -e TS_SELENIUM_PASSWORD=${TEST_USERNAME} \
