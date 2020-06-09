@@ -11,10 +11,9 @@ echo "========Starting nigtly test job $(date)========"
 source tests/.infra/centos-ci/functional_tests_utils.sh
 
 function runOpenshiftConnectorTest(){
-  echo "++++++++++++++++++++++++++++KeyCloak URL+++++++++++++++++++++++++++++"
-    curl -kvL -X POST -d 'client_id=che-public&username=admin&password=admin&grant_type=password' https://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token
-  echo "++++++++++++++++++++++++++++KeyCloak URL+++++++++++++++++++++++++++++"
-    docker run --shm-size=4096m -p 5920:5920 \
+  docker run maxura/e2e-tests:crl-latest -e URL=ttps://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token
+  
+  : '  docker run --shm-size=4096m -p 5920:5920 \
     -e TS_SELENIUM_HEADLESS=false \
     -e TS_SELENIUM_LOAD_PAGE_TIMEOUT=420000 \
     -e TS_SELENIUM_WORKSPACE_STATUS_POLLING=20000 \
@@ -30,6 +29,7 @@ function runOpenshiftConnectorTest(){
     -e TEST_SUITE=test-openshift-connector \
     -e NODE_TLS_REJECT_UNAUTHORIZED=0 \
     maxura/e2e-tests:CHE-16927 || IS_TESTS_FAILED=true
+    '
 }
 
 
