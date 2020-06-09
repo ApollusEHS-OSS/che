@@ -435,7 +435,7 @@ function runDevfileTestSuite() {
   REPORT_FOLDER=$(pwd)/report
   ### Run tests
   docker run --shm-size=1g --net=host  --ipc=host -v $REPORT_FOLDER:/tmp/e2e/report:Z \
-  -e TS_SELENIUM_BASE_URL="http://$CHE_ROUTE" \
+  -e TS_SELENIUM_BASE_URL="https://$CHE_ROUTE" \
   -e TS_SELENIUM_LOG_LEVEL=DEBUG \
   -e TS_SELENIUM_MULTIUSER=true \
   -e TS_SELENIUM_USERNAME="admin" \
@@ -445,7 +445,7 @@ function runDevfileTestSuite() {
   -e TS_SELENIUM_LOAD_PAGE_TIMEOUT=240000 \
   -e TS_SELENIUM_WORKSPACE_STATUS_POLLING=20000 \
   -e NODE_TLS_REJECT_UNAUTHORIZED=0 \
-  quay.io/eclipse/che-e2e:nightly || IS_TESTS_FAILED=true
+  maxura/e2e-tests:CHE-16927 || IS_TESTS_FAILED=true
 }
 
 function setupSelfSignedCertificate() {
