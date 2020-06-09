@@ -12,7 +12,7 @@ source tests/.infra/centos-ci/functional_tests_utils.sh
 
 function runOpenshiftConnectorTest(){
   echo "+++++++++++++++++++++++>>>>>>>>>>>>>>>>>>"
-  docker run maxura/e2e-tests:crl-latest -e URL=https://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token
+  docker run -e URL=https://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token maxura/e2e-tests:crl-latest 
   
   : '  docker run --shm-size=4096m -p 5920:5920 \
     -e TS_SELENIUM_HEADLESS=false \
