@@ -11,7 +11,8 @@ echo "========Starting nigtly test job $(date)========"
 source tests/.infra/centos-ci/functional_tests_utils.sh
 
 function runOpenshiftConnectorTest(){
-  docker run maxura/e2e-tests:crl-latest -e URL=ttps://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token
+  echo "+++++++++++++++++++++++>>>>>>>>>>>>>>>>>>"
+  docker run maxura/e2e-tests:crl-latest -e URL=https://keycloak-che.$(minishift ip).nip.io/auth/realms/che/protocol/openid-connect/token
   
   : '  docker run --shm-size=4096m -p 5920:5920 \
     -e TS_SELENIUM_HEADLESS=false \
